@@ -39,7 +39,7 @@ public class Book {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
     @ToString.Exclude
-    private List<Loan>  loans = new ArrayList<>();
+    private List<Loan> loans = new ArrayList<>();
 
     public Book(String title, String author, String isbn) {
         this.title = title;
