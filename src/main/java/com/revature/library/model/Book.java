@@ -9,9 +9,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "books")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,6 +36,10 @@ public class Book {
 
     private boolean available = true;
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    @ToString.Exclude
+    private List<Loan>  loans = new ArrayList<>();
 
     public Book(String title, String author, String isbn) {
         this.title = title;

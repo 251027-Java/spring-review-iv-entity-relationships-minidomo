@@ -9,11 +9,12 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "patron")
 @NoArgsConstructor
 @ToString
 public class Patron {
@@ -30,6 +31,10 @@ public class Patron {
     private String email;
 
     private LocalDateTime memberSince = LocalDateTime.now();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patron")
+    @ToString.Exclude
+    private List<Loan> loans = new ArrayList<>();
 
     public Patron(String name, String email) {
         this.name = name;
