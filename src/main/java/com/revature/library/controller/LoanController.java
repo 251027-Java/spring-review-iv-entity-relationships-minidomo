@@ -1,6 +1,6 @@
 package com.revature.library.controller;
 
-import com.revature.library.dto.LoanDtoCreation;
+import com.revature.library.dto.LoanDto;
 import com.revature.library.model.Loan;
 import com.revature.library.service.LoanService;
 import jakarta.validation.Valid;
@@ -22,9 +22,8 @@ public class LoanController {
     }
 
     @PostMapping("/loans")
-    public ResponseEntity<Loan> createLoan(@RequestBody @Valid Loan loan) {
-        LOG.debug("createLoan\n{}\n{}\n{}", loan, loan.getBook(), loan.getPatron());
-        return null;
+    public ResponseEntity<Loan> createLoan(@RequestBody @Valid LoanDto.Creation data) {
+        return ResponseEntity.ok(loanService.createLoan(data.getBookId(), data.getPatronId()));
     }
 
     @PutMapping("/loans/{id}/return")
