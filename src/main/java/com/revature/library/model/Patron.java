@@ -10,38 +10,31 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
 @ToString
-public class Book {
+public class Patron {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false)
-    private String author;
+    private String name;
 
     @Column(unique = true, nullable = false)
-    private String isbn;
+    private String email;
 
     @Column(nullable = false)
-    private boolean available = true;
+    private LocalDateTime memberSince = LocalDateTime.now();
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patron")
     @ToString.Exclude
     private List<Loan> loans = new ArrayList<>();
 
-    public Book(String title, String author, String isbn) {
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
+    public Patron(String name, String email) {
+        this.name = name;
+        this.email = email;
     }
 }

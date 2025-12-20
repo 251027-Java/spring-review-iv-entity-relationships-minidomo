@@ -1,14 +1,14 @@
 package com.revature.library.dto;
 
-import io.soabase.recordbuilder.core.RecordInterface;
+import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@RecordInterface
-public interface ErrorResponse {
-    String message();
-
-    int status();
-
-    LocalDateTime timestamp();
+@Builder
+@Data
+public class ErrorResponse {
+    LocalDateTime timestamp;
+    private String message;
+    private int status;
 }
