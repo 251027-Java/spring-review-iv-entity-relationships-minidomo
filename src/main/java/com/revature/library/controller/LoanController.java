@@ -22,22 +22,22 @@ public class LoanController {
     }
 
     @PostMapping("/loans")
-    public ResponseEntity<Loan> createLoan(@RequestBody @Valid LoanDto.Creation dto) {
+    public ResponseEntity<LoanDto.Own> createLoan(@RequestBody @Valid LoanDto.Creation dto) {
         return ResponseEntity.ok(loanService.createLoan(dto.getBookId(), dto.getPatronId()));
     }
 
     @PutMapping("/loans/{id}/return")
-    public ResponseEntity<Loan> returnLoan(@PathVariable long id) {
+    public ResponseEntity<LoanDto.Own> returnLoan(@PathVariable long id) {
         return ResponseEntity.ok(loanService.returnLoan(id));
     }
 
     @GetMapping("/loans/active")
-    public ResponseEntity<List<Loan>> activeLoan() {
+    public ResponseEntity<List<LoanDto.Own>> activeLoan() {
         return ResponseEntity.ok(loanService.getActiveLoans());
     }
 
     @GetMapping("/patrons/{id}/loans")
-    public ResponseEntity<List<Loan>> patronLoans(@PathVariable long id) {
+    public ResponseEntity<List<LoanDto.Own>> patronLoans(@PathVariable long id) {
         return ResponseEntity.ok(loanService.getLoansByPatron(id));
     }
 }
