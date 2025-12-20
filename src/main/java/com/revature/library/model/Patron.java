@@ -26,6 +26,7 @@ public class Patron {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private LocalDateTime memberSince = LocalDateTime.now();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patron")
