@@ -19,17 +19,17 @@ public class PatronController {
     }
 
     @PostMapping
-    public ResponseEntity<Patron> createPatron(@RequestBody @Valid PatronDto.Creation dto) {
+    public ResponseEntity<PatronDto.Own> createPatron(@RequestBody @Valid PatronDto.Creation dto) {
         return ResponseEntity.ok(patronService.createPatron(dto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Patron> findById(@PathVariable Long id) {
+    public ResponseEntity<PatronDto.Own> findById(@PathVariable Long id) {
         return ResponseEntity.ok(patronService.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Patron>> findAllPatrons() {
+    public ResponseEntity<List<PatronDto.Own>> findAllPatrons() {
         return ResponseEntity.ok(patronService.findAll());
     }
 }
