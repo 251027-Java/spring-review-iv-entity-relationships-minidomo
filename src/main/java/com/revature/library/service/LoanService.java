@@ -10,6 +10,7 @@ import com.revature.library.repository.PatronRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,8 +34,11 @@ public class LoanService {
         return loanMapper.toDto(loanRepository.save(new Loan(book, patron)));
     }
 
+    @Transactional
     public LoanDto.Own returnLoan(Long loanId) {
-        return loanRepository.findById(loanId).map(loanMapper::toDto).orElseThrow(() -> new LoanNotFoundException("Loan with id " + loanId + " not found"));
+        var loan = loanRepository.findById(loanId).orElseThrow(() -> new LoanNotFoundException("Loan with id " + loanId + " not found"));
+        loan.setReturnDate(LocalDateTime.now());
+        return loanMapper.toDto(loanRepository.save(loan));
     }
 
     public List<LoanDto.Own> getActiveLoans() {
