@@ -29,7 +29,7 @@ public class Book {
     @Column(unique = true, nullable = false)
     private String isbn;
 
-    private Boolean available = true;
+    private boolean available = true;
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
