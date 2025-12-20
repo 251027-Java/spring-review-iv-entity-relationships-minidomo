@@ -1,7 +1,9 @@
 package com.revature.library.service;
 
+import com.revature.library.dto.BookDto;
 import com.revature.library.exception.BookNotAvailableException;
 import com.revature.library.exception.BookNotFoundException;
+import com.revature.library.mapper.BookMapper;
 import com.revature.library.model.Book;
 import com.revature.library.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,11 @@ import java.util.Optional;
 @Service
 public class BookService {
     private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
 
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
     }
 
     public List<Book> getAllBooks() {
@@ -26,8 +30,8 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
-    public Book addBook(Book book) {
-        return bookRepository.save(book);
+    public Book addBook(BookDto.Creation dto) {
+        return bookRepository.save(bookMapper.toEntity(dto));
     }
 
     @Transactional

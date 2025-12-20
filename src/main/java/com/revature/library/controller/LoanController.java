@@ -22,8 +22,8 @@ public class LoanController {
     }
 
     @PostMapping("/loans")
-    public ResponseEntity<Loan> createLoan(@RequestBody @Valid LoanDto.Creation data) {
-        return ResponseEntity.ok(loanService.createLoan(data.getBookId(), data.getPatronId()));
+    public ResponseEntity<Loan> createLoan(@RequestBody @Valid LoanDto.Creation dto) {
+        return ResponseEntity.ok(loanService.createLoan(dto.getBookId(), dto.getPatronId()));
     }
 
     @PutMapping("/loans/{id}/return")

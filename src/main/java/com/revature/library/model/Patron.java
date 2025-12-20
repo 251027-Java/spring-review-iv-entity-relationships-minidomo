@@ -1,7 +1,6 @@
 package com.revature.library.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,11 +21,9 @@ public class Patron {
     private Long id;
 
     @Column(nullable = false)
-    @NotBlank(message = "Name is required")
     private String name;
 
-    @Column(unique = true)
-    @NotBlank(message = "Email is required")
+    @Column(unique = true, nullable = false)
     private String email;
 
     private LocalDateTime memberSince = LocalDateTime.now();

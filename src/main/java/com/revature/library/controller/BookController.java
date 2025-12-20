@@ -1,5 +1,6 @@
 package com.revature.library.controller;
 
+import com.revature.library.dto.BookDto;
 import com.revature.library.exception.BookNotFoundException;
 import com.revature.library.model.Book;
 import com.revature.library.service.BookService;
@@ -34,8 +35,8 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> addBook(@RequestBody @Valid Book book) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.addBook(book));
+    public ResponseEntity<Book> addBook(@RequestBody @Valid BookDto.Creation dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.addBook(dto));
     }
 
     @PutMapping("/{id}/checkout")
